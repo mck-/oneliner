@@ -21,7 +21,6 @@
   (let ((alist (hash-to-alist hash)))
     (car (reduce (lambda (x y) (if (> (cdr x) (cdr y)) x y )) alist))))
 
-
 ;;; Custom data structure for hash count
 ;;; An Alist where the value is another Alist, which holds count and next
 ;;; -----------------
@@ -64,3 +63,7 @@
 (defun get-count (word alist-count)
   "Given a word and an alist-count, return number of occurence"
   (cdar (aval word alist-count)))
+
+(defun alist-most-frequent (alist-count)
+  "Given an alist-count, return most frequent word"
+  (car (reduce (lambda (x y) (if (> (cdadr x) (cdadr y)) x y )) alist-count))))

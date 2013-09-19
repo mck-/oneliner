@@ -38,3 +38,9 @@
   (assert-equal 3 (get-count "this" (alist-count "not this but this is this")))
   (assert-equal 4 (get-count "this" (alist-count "this THIS This this")))
   (assert-equal 5 (get-count "this" (alist-count "this, THIS This. this; THIS!"))))
+
+(define-test alist-highest-occurence
+  (:tag :util)
+  (assert-equal "this" (alist-most-frequent (alist-count "this is this test")))
+  (assert-equal "is" (alist-most-frequent (alist-count "Is this is this test is?")))
+  (assert-equal "test" (alist-most-frequent (alist-count "TEST test, testing; test!"))))
