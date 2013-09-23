@@ -76,11 +76,12 @@
   "Given a word, put it to lower-case and remove all symbols"
   (string-downcase (regex-replace-all "[!-@]" word "")))
 
+(defun split-words (sentence)
+  (mapcar #'simplify-word
+          (split-sequence #\Space sentence)))
+
 (defun words-sorted (sentence)
-  (sort
-   (mapcar #'simplify-word
-           (split-sequence #\Space sentence))
-   #'string<))
+  (sort (split-words sentence) #'string<))
 
 (defun aval (key alist)
   "Given alist and key, return value"
