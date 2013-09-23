@@ -42,27 +42,19 @@
 (define-test alist-highest-occurence
   "Test return of alist-most-frequent, to include next counts too"
   (:tag :util)
-  (assert-equal '("this"
-                  (COUNT . 2)
-                  (NEXT
-                   ("is" . 1)
-                   ("test" . 1)))
-                (alist-most-frequent (count-words "this is this test")))
-  (assert-equal '("is"
-                  (COUNT . 3)
-                  (NEXT
-                   ("this" . 2)))
-                (alist-most-frequent (count-words "Is this is this test is?")))
-  (assert-equal '("test"
-                  (COUNT . 3)
-                  (NEXT
-                   ("test" . 1)
-                   ("testing" . 1)))
-                (alist-most-frequent (count-words "TEST test, testing; test!"))))
+  (assert-equal '(("test" . 1)("is" . 1))
+                (val (list (alist-most-frequent (count-words "this is this test")))
+                     "this" 'next))
+  (assert-equal 2 (val (list (alist-most-frequent (count-words "Is this is this test is?")))
+                     "is" 'next "this"))
+  (assert-equal '(("testing" . 1)("test" . 1))
+                (val (list (alist-most-frequent (count-words "TEST test, testing; test!")))
+                     "test" 'next)))
 
 (define-test next-counts
   "Test counting of next words, given a word and a string"
   (:tag :util)
   (assert-equal 2 (aval "is" (next-counts "this" "this is a test and this is another test")))
   (assert-equal 1 (aval "a" (next-counts "is" "this is a test and this is another test")))
+  (assert-equal '(("and" . 1)) (next-counts "test" "this is a test and this is another test")))
   (assert-equal 1 (aval "and" (next-counts "test" "this is a test and this is another test"))))

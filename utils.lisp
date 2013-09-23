@@ -67,7 +67,7 @@
                    (let* ((cur (car words))
                           (next (cadr words))
                           (freq (aval next alist)))
-                     (if (string= cur word)
+                     (if (and next (string= cur word))
                          (iter (cdr words) (acons next (if freq (1+ freq) 1) alist))
                          (iter (cdr words) alist))))))
       (iter words '()))))
@@ -102,4 +102,4 @@
 
 (defun alist-most-frequent (alist-count)
   "Given an alist-count, return most frequent item"
-  (reduce (lambda (x y) (if (> (cdadr x) (cdadr y)) x y )) alist-count))
+  (reduce (lambda (x y) (if (> (aval 'count (cdr x)) (aval 'count (cdr y))) x y )) alist-count))
