@@ -101,5 +101,5 @@
   (cdar (aval word alist-count)))
 
 (defun alist-most-frequent (alist-count)
-  "Given an alist-count, return most frequent word"
-  (car (reduce (lambda (x y) (if (> (cdadr x) (cdadr y)) x y )) alist-count))))
+  "Given an alist-count, return most frequent item"
+  (reduce (lambda (x y) (if (> (cdadr x) (cdadr y)) x y )) alist-count))
