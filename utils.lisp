@@ -46,6 +46,28 @@
                          (iter (cdr words) (acons word `((count . ,count)) alist)))))))
       (iter words '()))))
 
+(defun alist-next-count (string alist)
+  "Given the original string and the alist resulting from alist-count, count next words"
+  (if (null alist) nil
+      (cons
+       (list (caar alist)
+             `(next ,@(next-counts (caar alist) string))
+             (cadar alist))
+       (alist-next-count string (cdr alist)))))
+
+(defun next-counts (word string)
+  "Given a word and the string, return list of (word . count)"
+  (let ((words (split-words string)))
+    (labels ((iter (words alist)
+               (if (null words) alist
+                   (let* ((cur (car words))
+                          (next (cadr words))
+                          (freq (aval next alist)))
+                     (if (string= cur word)
+                         (iter (cdr words) (acons next (if freq (1+ freq) 1) alist))
+                         (iter (cdr words) alist))))))
+      (iter words '()))))
+
 (defun simplify-word (word)
   "Given a word, put it to lower-case and remove all symbols"
   (string-downcase (regex-replace-all "[!-@]" word "")))
