@@ -34,6 +34,10 @@
 ;;;  - wordA occured 3 times, always followed by wordB
 ;;;  - wordB occured 5 times, two times followed by wordC and three times by wordD
 
+(defun count-words (string)
+  "Given a string, return an alist which counts the words and the next words that come after it"
+  (alist-next-count string (alist-count string)))
+
 (defun alist-count (string)
   "Given a string, return an Alist counting the words"
   (let ((words (words-sorted string)))
