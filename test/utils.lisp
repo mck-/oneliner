@@ -58,3 +58,13 @@
   (assert-equal 1 (aval "a" (next-counts "is" "this is a test and this is another test")))
   (assert-equal '(("and" . 1)) (next-counts "test" "this is a test and this is another test"))
   (assert-equal 1 (aval "and" (next-counts "test" "this is a test and this is another test"))))
+
+(define-test most-frequent-next
+  "Test returning most frequent word coming after"
+  (:tag :util)
+  (assert-equal "this" (alist-most-frequent-next
+                        (alist-most-frequent
+                         (count-words "Is this is this test is?"))))
+  (assert-equal "bar" (alist-most-frequent-next
+                        (alist-most-frequent
+                         (count-words "foo bar foo foo bar baz foo baz?")))))

@@ -103,3 +103,8 @@
 (defun alist-most-frequent (alist-count)
   "Given an alist-count, return most frequent item"
   (reduce (lambda (x y) (if (> (aval 'count (cdr x)) (aval 'count (cdr y))) x y )) alist-count))
+
+(defun alist-most-frequent-next (most-frequent)
+  "Given an object (from alist-most-frequent), return the word that occurs most frequently as next word"
+  (car (reduce (lambda (x y) (if (> (cdr x) (cdr y)) x y))
+               (val (cdr most-frequent) 'next))))
