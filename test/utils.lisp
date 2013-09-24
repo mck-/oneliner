@@ -19,7 +19,7 @@
                      "this" 'next))
   (assert-equal 2 (val (list (alist-most-frequent (count-words "Is this is this test is?")))
                      "is" 'next "this"))
-  (assert-equal '(("testing" . 1)("test" . 1))
+  (assert-equal '(("testing" . 1))
                 (val (list (alist-most-frequent (count-words "TEST test, testing; test!")))
                      "test" 'next)))
 

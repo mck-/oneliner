@@ -50,7 +50,7 @@
                    (let* ((cur (car words))
                           (next (cadr words))
                           (freq (aval next alist)))
-                     (if (and next (string= cur word))
+                     (if (and next (string= cur word) (not (string= next word)))
                          (iter (cdr words) (acons next (if freq (1+ freq) 1) alist))
                          (iter (cdr words) alist))))))
       (iter words '()))))
