@@ -2,7 +2,7 @@
 
 (in-package #:cl-oneliner)
 
-;;; Custom data structure for hash count
+;;; Custom data structure for alist count
 ;;; An Alist where the value is another Alist, which holds count and next
 ;;; -----------------
 ;;; ((wordA (count . 3)
@@ -14,6 +14,8 @@
 ;;; This example shows a hashcount of words, and the word occurance of the words after the word
 ;;;  - wordA occured 3 times, always followed by wordB
 ;;;  - wordB occured 5 times, two times followed by wordC and three times by wordD
+
+;;; Creating the alist-count
 
 (defun count-words (string)
   "Given a string, return an alist which counts the words and the next words that come after it"
@@ -63,6 +65,8 @@
 
 (defun words-sorted (sentence)
   (sort (split-words sentence) #'string<))
+
+;;; Reader methods for alist-count
 
 (defun aval (key alist)
   "Given alist and key, return value"
