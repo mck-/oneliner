@@ -91,5 +91,7 @@
 
 (defun alist-most-frequent-next (most-frequent)
   "Given an object (from alist-most-frequent), return the word that occurs most frequently as next word"
-  (car (reduce (lambda (x y) (if (> (cdr x) (cdr y)) x y))
-               (val (cdr most-frequent) 'next))))
+  (let ((next-words (val (cdr most-frequent) 'next)))
+    (when next-words
+      (car (reduce (lambda (x y) (if (> (cdr x) (cdr y)) x y))
+                   next-words)))))

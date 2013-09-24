@@ -34,6 +34,7 @@
 (define-test most-frequent-next
   "Test returning most frequent word coming after"
   (:tag :util)
+  (assert-equal nil (alist-most-frequent-next '("this" (NEXT) (COUNT . 1))))
   (assert-equal "this" (alist-most-frequent-next
                         (alist-most-frequent
                          (count-words "Is this is this test is?"))))
