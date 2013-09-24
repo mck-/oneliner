@@ -94,7 +94,7 @@
 
 (defmacro val (alist &rest keys)
   "Given an alist, and a list of keys, retrieve value dot-notation style"
-  `(val-reversed ,alist ,@(nreverse keys)))
+  `(val-reversed ,alist ,@(reverse keys)))
 
 (defun get-count (word alist-count)
   "Given a word and an alist-count, return number of occurence"
