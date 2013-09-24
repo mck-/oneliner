@@ -56,5 +56,5 @@
   (:tag :util)
   (assert-equal 2 (aval "is" (next-counts "this" "this is a test and this is another test")))
   (assert-equal 1 (aval "a" (next-counts "is" "this is a test and this is another test")))
-  (assert-equal '(("and" . 1)) (next-counts "test" "this is a test and this is another test")))
+  (assert-equal '(("and" . 1)) (next-counts "test" "this is a test and this is another test"))
   (assert-equal 1 (aval "and" (next-counts "test" "this is a test and this is another test"))))
