@@ -35,12 +35,14 @@
 
 (defun alist-next-count (string alist)
   "Given the original string and the alist resulting from alist-count, count next words"
-  (if (null alist) nil
-      (cons
-       (list (caar alist)
-             `(next ,@(next-counts (caar alist) string))
-             (cadar alist))
-       (alist-next-count string (cdr alist)))))
+  (labels ((iter (alist ans)
+             (if (null alist) ans
+                 (iter (cdr alist)
+                       (cons (list (caar alist)
+                                   `(next ,@(next-counts (caar alist) string))
+                                   (cadar alist))
+                             ans)))))
+    (iter alist '())))
 
 (defun next-counts (word string)
   "Given a word and the string, return list of (word . count)"
